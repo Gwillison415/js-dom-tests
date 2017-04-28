@@ -1,7 +1,7 @@
 // Define a function named createDiv that takes no arguments.
 // Return a <div> element.
 function createDiv() {
-  // return document.createElement('div');
+  return document.createElement('div');
 }
 
 
@@ -10,7 +10,11 @@ function createDiv() {
 //   className (string)
 //
 // Return a <div> element with the given className.
-
+function createDivWithClass(string) {
+    var newRow = document.createElement("div");
+    newRow.setAttribute("class", string);
+    return newRow;
+}
 
 
 
@@ -22,6 +26,17 @@ function createDiv() {
 //   * Applies the "important" CSS class if its text starts with "URGENT".
 //     TIP: Applying a CSS class means adding on top of what's already there.
 //   * Make no change otherwise
+
+function updateTodoList(todoList) {
+    let taskStatus = todoList.children
+    for (var i = 0; i < taskStatus.length; i++) {
+            if (todoList.children[i].innerText.startsWith('COMPLETED')) {
+              todoList.children[i].remove();
+            } else if (todoList.children[i].innerText.startsWith("URGENT")) {
+              todoList.children[i].className += ' important';
+            }
+      }
+    }
 
 
 
@@ -53,7 +68,22 @@ function createDiv() {
 //      <li><a href="https://www.galvanize.com">Galvanize</a></li>
 //    </ul>
 
-
+function createList(object) {
+    let returnedUl = document.createElement("ul");
+    for (let key in object) {
+      let liElem = document.createElement('li');
+      let aTags= document.createElement('a');
+      // if (key.hasChildNodes("a")) {
+      //     console.log(returnedUl.createElement('li'));
+      // }
+      aTags.text = key;
+      aTags.href = object[key];
+      liElem.text = aTags;
+      liElem.appendChild(aTags);
+      returnedUl.appendChild(liElem);
+    }
+    return returnedUl;
+}
 
 
 // Write a function named extractQuote that takes in one argument.
@@ -80,8 +110,26 @@ function createDiv() {
 // TIP: Assume that if there's an opening double quote, there's a closing
 // double quote as well.
 
+function extractQuote(article) {
+
+    let nestedElement = article.querySelectorAll('p');
+
+    // console.log(nestedElement);
+    // console.log(nestedElement[0].innerText);
+    if (nestedElement[0].innerText.includes('"')) {
+      let quotedText = nestedElement[0].innerText.slice(nestedElement[0].innerText.indexOf('"'), nestedElement[0].innerText.lastIndexOf('"') + 1);
+      let blockQuote = document.createElement('BLOCKQUOTE');
+
+      blockQuote.innerText = quotedText;
+      nestedElement[0].remove('p'); //createTable is not defined
+      article.append(blockQuote);
 
 
+      //return quotedText;
+    }
+
+
+ }
 
 // Define a function named createTable that takes one argument.
 //   data (array of arrays)
@@ -130,3 +178,26 @@ function createDiv() {
 //
 // TIP: Assume that data array has at least three elements.
 // TIP: Assume that the elements of the data array are equal in length.
+
+function createTable(data) {
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tableBody = document.createElement('tbody');
+    let tableRow = document.createElement('tr');
+    let tdata = document.createElement('td');
+    table.append(thead);
+    thead.append(tableRow);
+    for (var i = 0; i < data[0].length; i++) {
+      var row = document.createElement('th');
+      tableRow.append(row);
+      row.innerText = data[0][i];
+    };
+    //handle table data minues tr's and tfoot
+    for (var i = 1; i < data.length - 1; i++1 {
+      for (var ii = 0; ii < data[i].length; ii++) {
+        data[i][ii]
+      }
+    }
+
+
+}

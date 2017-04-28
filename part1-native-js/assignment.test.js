@@ -22,6 +22,7 @@ window.onload = function() {
   })
 
   suite('updateTodoList', function() {
+    //debugger;
     var ul;
     var addListText = function(text, precede) {
       var li = document.createElement('li');
