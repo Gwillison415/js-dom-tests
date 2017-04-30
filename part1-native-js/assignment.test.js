@@ -142,6 +142,7 @@ window.onload = function() {
 
       // Test the thead
       var theads = result.getElementsByTagName('thead');
+      //debugger;
       assert.strictEqual(theads.length, 1);
       assert.strictEqual(theads[0].childNodes.length, 1);
       testRow(data[0], 'th', theads[0].childNodes[0]);

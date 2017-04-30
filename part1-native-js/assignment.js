@@ -178,26 +178,66 @@ function extractQuote(article) {
 //
 // TIP: Assume that data array has at least three elements.
 // TIP: Assume that the elements of the data array are equal in length.
-
+// non working copy
 function createTable(data) {
+   var tableData = data;
+    var headData = data.shift();
+    var footerData = data.pop();
     var table = document.createElement('table');
     var thead = document.createElement('thead');
-    var tableBody = document.createElement('tbody');
-    let tableRow = document.createElement('tr');
-    let tdata = document.createElement('td');
     table.append(thead);
-    thead.append(tableRow);
-    for (var i = 0; i < data[0].length; i++) {
-      var row = document.createElement('th');
-      tableRow.append(row);
-      row.innerText = data[0][i];
-    };
-    //handle table data minues tr's and tfoot
-    for (var i = 1; i < data.length - 1; i++1 {
-      for (var ii = 0; ii < data[i].length; ii++) {
-        data[i][ii]
-      }
+    var tr = document.createElement('tr');
+    thead.append(tr);
+    //console.log(data[0],'data length', data.length);
+
+    //handle table heads
+    for (let i = 0; i < headData.length; i++) {
+      var th = document.createElement('th');
+      tr.append(th);
+      //console.log(headData[i]);
+      th.innerText = headData[i];
     }
 
+    var tbody = document.createElement('tbody');
+
+
+
+
+    //handle table data minues tr's and tfoot
+    table.append(tbody);
+    for (let i = 0; i < tableData.length; i++) {
+      let tr = document.createElement('tr');
+      tbody.append(tr)
+      for (var ii = 0; ii < tableData[i].length; ii++) {
+        let tdata = document.createElement('td');
+        //tbody.append(tr);   ----was different, doesn't seem to have effect on layout
+        tr.append(tdata);
+        //console.log(tableData[i][ii]);
+        tdata.innerText = tableData[i][ii]; // each inner loop
+      }
+    }
+    //foot of the table
+
+  var tfooter = document.createElement('tfoot');
+  table.append(tfooter);
+  var tr = document.createElement('tr');
+  tfooter.append(tr);
+  //console.log(footerData);
+  for (let column = 0; column < footerData.length; column++) {
+    var td = document.createElement('td');
+    tr.append(td);
+    td.innerText = footerData[column];
+  }
+  //console.log(table);
+    return table;
 
 }
+
+
+
+
+
+
+
+
+//working copy
