@@ -180,10 +180,12 @@ function extractQuote(article) {
 // TIP: Assume that the elements of the data array are equal in length.
 // non working copy
 function createTable(data) {
-   var tableData = data;
-    var headData = data.shift();
-    var footerData = data.pop();
+   var tableData = data.slice();
+    var headData = tableData.shift();
+    var footerData = tableData.pop();
+
     var table = document.createElement('table');
+    //Table Head
     var thead = document.createElement('thead');
     table.append(thead);
     var tr = document.createElement('tr');
@@ -207,8 +209,8 @@ function createTable(data) {
     table.append(tbody);
     for (let i = 0; i < tableData.length; i++) {
       let tr = document.createElement('tr');
-      tbody.append(tr)
-      for (var ii = 0; ii < tableData[i].length; ii++) {
+      tbody.append(tr);
+      for (let ii = 0; ii < tableData[i].length; ii++) {
         let tdata = document.createElement('td');
         //tbody.append(tr);   ----was different, doesn't seem to have effect on layout
         tr.append(tdata);
@@ -228,7 +230,7 @@ function createTable(data) {
     tr.append(td);
     td.innerText = footerData[column];
   }
-  //console.log(table);
+  console.log(table);
     return table;
 
 }
@@ -241,3 +243,46 @@ function createTable(data) {
 
 
 //working copy
+// function createTable(data) {
+//   var bodyData = data.slice();      // array of arrays
+//   var headData = bodyData.shift();  // one array
+//   var footData = bodyData.pop();    // one array
+//
+//   var table = document.createElement('table');
+//
+//   // Table head
+//   var thead = document.createElement('thead');
+//   table.append(thead);
+//   var tr = document.createElement('tr');
+//   thead.append(tr);
+//   for (let col = 0; col < headData.length; col++) {
+//     var th = document.createElement('th');
+//     tr.append(th);
+//     th.innerText = headData[col];
+//   }
+//
+//   // Table body
+//   var tbody = document.createElement('tbody');
+//   table.append(tbody);
+//   for (let row = 0; row < bodyData.length; row++) {
+//     let tr = document.createElement('tr');
+//     tbody.append(tr);
+//     for (let col = 0; col < bodyData[row].length; col++) {
+//       let td = document.createElement('td');
+//       tr.append(td);
+//       td.innerText = bodyData[row][col];
+//     }
+//   }
+//
+//   // Table foot
+//   var tfoot = document.createElement('tfoot');
+//   table.append(tfoot);
+//   var tr = document.createElement('tr');
+//   tfoot.append(tr);
+//   for (let col = 0; col < footData.length; col++) {
+//     var td = document.createElement('td');
+//     tr.append(td);
+//     td.innerText = footData[col];
+//   }
+//   return table;
+// }
